@@ -3,7 +3,7 @@
 flutter_processing is the implementation of Processing APIs in Flutter. 
 
 All the code is written by following the amazing work of Matt Carroll, an ex-googler and 
-who was on the core Flutter Team. A video explanation of the this library can be found 
+who was on the core Flutter Team. A video explanation of the library can be found 
 in Matt's channel Super Declarative. 
 
 Check out https://www.youtube.com/playlist?list=PLR12su153J5MziyO6-Vhfgnf85fbqFqMf for more details. 
