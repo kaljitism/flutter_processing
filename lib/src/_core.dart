@@ -17,23 +17,6 @@ class Processing extends StatelessWidget {
   }
 }
 
-abstract class Sketch {
-  void setup();
-
-  void draw();
-
-  Canvas? canvas;
-  Size? size;
-
-  void background({
-    required Color color,
-    required Size size,
-  }) {
-    final paint = Paint()..color = color;
-    canvas?.drawRect(Offset.zero & size, paint);
-  }
-}
-
 class _SketchPainter extends CustomPainter {
   final Sketch sketch;
 
@@ -51,5 +34,21 @@ class _SketchPainter extends CustomPainter {
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) {
     return true;
+  }
+}
+
+abstract class Sketch {
+  void setup() {}
+
+  void draw() {}
+
+  Canvas? canvas;
+  Size? size;
+
+  void background({
+    required Color color,
+  }) {
+    final paint = Paint()..color = color;
+    canvas?.drawRect(Offset.zero & size!, paint);
   }
 }
