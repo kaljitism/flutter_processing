@@ -40,6 +40,8 @@ class _SketchPainter extends CustomPainter {
 class Sketch {
   Canvas? canvas;
   Size? size;
+  Paint? _fillPaint;
+  Paint? _strokePaint;
 
   final void Function(Sketch)? _setup;
   final void Function(Sketch)? _draw;
@@ -52,6 +54,16 @@ class Sketch {
 
   void _doSetup() {
     background(color: const Color(0xffc5c5c5));
+
+    _fillPaint = Paint()
+      ..color = const Color(0xffFFFFFF)
+      ..style = PaintingStyle.fill;
+
+    _strokePaint = Paint()
+      ..color = const Color(0xFF000000)
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 1;
+
     setup();
   }
 
@@ -74,7 +86,8 @@ class Sketch {
     required Offset center,
     required double diameter,
   }) {
-    final paint = Paint()..color = Colors.white;
-    canvas?.drawCircle(center, diameter / 2, paint);
+    canvas
+      ?..drawCircle(center, diameter / 2, _fillPaint!)
+      ..drawCircle(center, diameter / 2, _strokePaint!);
   }
 }
