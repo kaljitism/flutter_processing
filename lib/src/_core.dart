@@ -27,7 +27,7 @@ class _SketchPainter extends CustomPainter {
     sketch
       ..canvas = canvas
       ..size = size
-      ..setup()
+      .._doSetup()
       ..draw();
   }
 
@@ -46,6 +46,11 @@ class Sketch {
 
   final void Function(Sketch)? _setup;
   final void Function(Sketch)? _draw;
+
+  void _doSetup() {
+    background(color: const Color(0xffc5c5c5));
+    setup();
+  }
 
   void setup() {
     _setup?.call(this);
