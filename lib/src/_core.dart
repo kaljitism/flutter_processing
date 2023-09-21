@@ -37,10 +37,23 @@ class _SketchPainter extends CustomPainter {
   }
 }
 
-abstract class Sketch {
-  void setup() {}
+class Sketch {
+  Sketch.simple({
+    void Function(Sketch)? setup,
+    void Function(Sketch)? draw,
+  })  : _setup = setup,
+        _draw = draw;
 
-  void draw() {}
+  final void Function(Sketch)? _setup;
+  final void Function(Sketch)? _draw;
+
+  void setup() {
+    _setup?.call(this);
+  }
+
+  void draw() {
+    _draw?.call(this);
+  }
 
   Canvas? canvas;
   Size? size;

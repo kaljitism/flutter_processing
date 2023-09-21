@@ -12,7 +12,11 @@ void main() {
 
       await widgetTester.pumpWidget(
         Processing(
-          sketch: PaintBackgroundInSetupSketch(),
+          sketch: Sketch.simple(
+              setup: (s) {
+                s.background(color: const Color(0xff404040));
+              },
+              draw: (s) {}),
         ),
       );
 
@@ -26,7 +30,10 @@ void main() {
 
       await widgetTester.pumpWidget(
         Processing(
-          sketch: PaintBackgroundInDrawSketch(),
+          sketch: Sketch.simple(
+            setup: (s) {},
+            draw: (s) => s.background(color: const Color(0xff000000)),
+          ),
         ),
       );
 
@@ -40,7 +47,10 @@ void main() {
 
       await widgetTester.pumpWidget(
         Processing(
-          sketch: PaintOrangeBackgroundSketch(),
+          sketch: Sketch.simple(
+            setup: (s) {},
+            draw: (s) => s.background(color: const Color(0xffFFCC00)),
+          ),
         ),
       );
 
@@ -55,54 +65,14 @@ void main() {
 
       await widgetTester.pumpWidget(
         Processing(
-          sketch: PaintBackgroundInSetupAndDrawSketch(),
+          sketch: Sketch.simple(
+            setup: (s) => s.background(color: const Color(0xffffcc00)),
+            draw: (s) => s.background(color: const Color(0xff000000)),
+          ),
         ),
       );
 
       await screenMatchesGolden(widgetTester, "core_background_setup_draw");
     });
   });
-}
-
-class PaintBackgroundInSetupSketch extends Sketch {
-  @override
-  void setup() {
-    background(
-      color: const Color(0xff404040),
-    );
-  }
-}
-
-class PaintBackgroundInDrawSketch extends Sketch {
-  @override
-  void draw() {
-    background(
-      color: const Color(0xff000000),
-    );
-  }
-}
-
-class PaintOrangeBackgroundSketch extends Sketch {
-  @override
-  void draw() {
-    background(
-      color: const Color(0xffFFCC00),
-    );
-  }
-}
-
-class PaintBackgroundInSetupAndDrawSketch extends Sketch {
-  @override
-  void setup() {
-    background(
-      color: const Color(0xffffcc00),
-    );
-  }
-
-  @override
-  void draw() {
-    background(
-      color: const Color(0xff000000),
-    );
-  }
 }
