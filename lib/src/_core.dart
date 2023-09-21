@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 class Processing extends StatelessWidget {
   const Processing({
@@ -38,14 +38,17 @@ class _SketchPainter extends CustomPainter {
 }
 
 class Sketch {
+  Canvas? canvas;
+  Size? size;
+
+  final void Function(Sketch)? _setup;
+  final void Function(Sketch)? _draw;
+
   Sketch.simple({
     void Function(Sketch)? setup,
     void Function(Sketch)? draw,
   })  : _setup = setup,
         _draw = draw;
-
-  final void Function(Sketch)? _setup;
-  final void Function(Sketch)? _draw;
 
   void _doSetup() {
     background(color: const Color(0xffc5c5c5));
@@ -60,13 +63,18 @@ class Sketch {
     _draw?.call(this);
   }
 
-  Canvas? canvas;
-  Size? size;
-
   void background({
     required Color color,
   }) {
     final paint = Paint()..color = color;
     canvas?.drawRect(Offset.zero & size!, paint);
+  }
+
+  void circle({
+    required Offset center,
+    required double diameter,
+  }) {
+    final paint = Paint()..color = Colors.white;
+    canvas?.drawCircle(center, diameter / 2, paint);
   }
 }

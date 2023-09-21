@@ -66,5 +66,22 @@ void main() {
 
       await screenMatchesGolden(widgetTester, "core_background_setup_draw");
     });
+
+    testGoldens("draw a circle()", (widgetTester) async {
+      configureWindowForSpecTest(widgetTester);
+
+      await widgetTester.pumpWidget(
+        Processing(
+          sketch: Sketch.simple(
+            draw: (s) => s.circle(
+              center: const Offset(56, 46),
+              diameter: 55,
+            ),
+          ),
+        ),
+      );
+
+      await screenMatchesGolden(widgetTester, "shape_2-d-primitives_circle");
+    });
   });
 }
